@@ -32,7 +32,7 @@ public class Recipe {
 		return amtChocolate;
 	}
     /**
-	 * @param amtChocolate   The amtChocolate to set.
+	 * @param chocolate   The amtChocolate to set.
 	 */
     public void setAmtChocolate(String chocolate) throws RecipeException {
     	int amtChocolate = 0;
@@ -65,6 +65,7 @@ public class Recipe {
     	}
 		if (amtCoffee >= 0) {
 			this.amtCoffee = amtCoffee;
+			System.out.println(5);
 		} else {
 			throw new RecipeException("Units of coffee must be a positive integer");
 		}
@@ -105,6 +106,7 @@ public class Recipe {
     	try {
     		amtSugar = Integer.parseInt(sugar);
     	} catch (NumberFormatException e) {
+			//DEFECT: Fails to per
     		throw new RecipeException("Units of sugar must be a positive integer");
     	}
 		if (amtSugar >= 0) {
@@ -169,13 +171,16 @@ public class Recipe {
 	 */
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
+		//NO FUNCTIONAL DEFECTS
+		if (this == obj) //OK: == operator checks for mem location; if pt to same memory then must have same name value
 			return true;
-		if (obj == null)
+		if (obj == null) //OK: if null then nothing to compare
 			return false;
-		if (getClass() != obj.getClass())
+		if (getClass() != obj.getClass()) //OK: if not same class at runtime then nothing to compare (edge case would be
+			// parent/child class)
 			return false;
 		final Recipe other = (Recipe) obj;
+		// CONVOLUTED CONTROL STRUCTURES SO TEST CASES FOR MAX CODE COVERAGE IS THE CHALLENGE
 		if (name == null) {
 			if (other.name != null)
 				return false;
@@ -188,6 +193,11 @@ public class Recipe {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		//Formula can be optimized
+		// name is never equal to null in lifecycle of recipe object - proof in setName()
+		// after removing conditional below we're left with following:
+		//     ( (prime * result) + name.hashCode()) where (prime * result is always 31) so can be simplified - PEMDAS
+		// Optimized formula: int result = prime * name.hashCode();
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		return result;
 	}
