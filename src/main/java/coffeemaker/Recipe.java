@@ -169,23 +169,17 @@ public class Recipe {
 	 */
 	@Override
 	public boolean equals(Object obj) {
-		//NO FUNCTIONAL DEFECTS
-
-		//OK: == operator checks for mem location; if pt to same memory then must have same name value
 		if (this == obj)
 			return true;
-		//OK: if null then nothing to compare
 		if (obj == null)
 			return false;
-		//OK: if not same class at runtime then nothing to compare (test case would be parent/child class)
-		//we will never enter this control structure as there are no parent/child class relations with Recipe
 		if (getClass() != obj.getClass())
+			//will never enter this control structure as there are no parent/child class relations with Recipe
 			return false;
 
 		final Recipe other = (Recipe) obj;
-
-		// name is never null; we will never enter this control structures true flow
 		if (name == null) {
+			// name is never null; we will never enter this control structures true flow
 			if (other.name != null)
 				return false;
 		} else if (!name.equals(other.name))
@@ -198,7 +192,7 @@ public class Recipe {
 		// final int prime = 31;
 		// int result = 1;
 		// result = prime * result + ((name == null) ? 0 : name.hashCode());
-		// Formula above can be optimized
+		// Formula above optimized
 		// name is never equal to null in lifecycle of recipe object - proof in setName()
 		// Using PEMDAS we can further optimize
 		// In ( (prime * result) + name.hashCode()) prime * result is always 31 so simplify to prime + name,hashCode()
