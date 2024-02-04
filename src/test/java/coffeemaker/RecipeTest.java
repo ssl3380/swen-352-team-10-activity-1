@@ -164,15 +164,15 @@ class RecipeTest {
 
     @Test
     void testEquals() {
-        //Shall return equals as testRecipe and testObj name both ""
+        //Shall return equals as testRecipe and testRecipeAgainst name both ""
         assertEquals(testRecipeAgainst, testRecipe);
 
-        //Shall return not equals as testRecipe name is "" and testObj's name is not
+        //Shall return not equals as testRecipe name is "" and testRecipeAgainst name is not
         testRecipeAgainst.setName("I have a diff name than you");
         assertNotEquals(testRecipeAgainst, testRecipe);
 
         testRecipe.setName("Capp");
-        //Shall return not equals as testObj name is "" but test obj's name is not
+        //Shall return not equals as testRecipeAgainst and testRecipe name are not same
         assertNotEquals(testRecipeAgainst, testRecipe);
 
         testRecipeAgainst.setName(testRecipe.getName());
