@@ -12,9 +12,9 @@ class RecipeTest {
     @BeforeEach
     void setUp() {
         testRecipe = new Recipe();
-        testRecipe.setName(null); // name = ""
+        testRecipe.setName(null);
         testRecipeAgainst = new Recipe();
-        testRecipeAgainst.setName(null); // name = ""
+        testRecipeAgainst.setName(null);
         try {
             testRecipe.setPrice("5");
             testRecipe.setAmtCoffee("2");
