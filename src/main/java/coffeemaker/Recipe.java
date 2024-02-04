@@ -32,16 +32,16 @@ public class Recipe {
 		return amtChocolate;
 	}
     /**
-	 * @param amtChocolate   The amtChocolate to set.
+	 * @param chocolate   The amtChocolate to set.
 	 */
     public void setAmtChocolate(String chocolate) throws RecipeException {
-    	int amtChocolate = 0;
+    	int amtChocolate;
     	try {
     		amtChocolate = Integer.parseInt(chocolate);
     	} catch (NumberFormatException e) {
     		throw new RecipeException("Units of chocolate must be a positive integer");
     	}
-		if (amtChocolate >= 0) {
+		if (amtChocolate > 0) {
 			this.amtChocolate = amtChocolate;
 		} else {
 			throw new RecipeException("Units of chocolate must be a positive integer");
@@ -54,16 +54,16 @@ public class Recipe {
 		return amtCoffee;
 	}
     /**
-	 * @param amtCoffee   The amtCoffee to set.
+	 * @param coffee   The amtCoffee to set.
 	 */
     public void setAmtCoffee(String coffee) throws RecipeException {
-    	int amtCoffee = 0;
+    	int amtCoffee;
     	try {
     		amtCoffee = Integer.parseInt(coffee);
     	} catch (NumberFormatException e) {
     		throw new RecipeException("Units of coffee must be a positive integer");
     	}
-		if (amtCoffee >= 0) {
+		if (amtCoffee > 0) {
 			this.amtCoffee = amtCoffee;
 		} else {
 			throw new RecipeException("Units of coffee must be a positive integer");
@@ -76,16 +76,16 @@ public class Recipe {
 		return amtMilk;
 	}
     /**
-	 * @param amtMilk   The amtMilk to set.
+	 * @param milk   The amtMilk to set.
 	 */
     public void setAmtMilk(String milk) throws RecipeException{
-    	int amtMilk = 0;
+    	int amtMilk;
     	try {
     		amtMilk = Integer.parseInt(milk);
     	} catch (NumberFormatException e) {
     		throw new RecipeException("Units of milk must be a positive integer");
     	}
-		if (amtMilk >= 0) {
+		if (amtMilk > 0) {
 			this.amtMilk = amtMilk;
 		} else {
 			throw new RecipeException("Units of milk must be a positive integer");
@@ -98,16 +98,16 @@ public class Recipe {
 		return amtSugar;
 	}
     /**
-	 * @param amtSugar   The amtSugar to set.
+	 * @param sugar   The amtSugar to set.
 	 */
     public void setAmtSugar(String sugar) throws RecipeException {
-    	int amtSugar = 0;
+    	int amtSugar;
     	try {
     		amtSugar = Integer.parseInt(sugar);
     	} catch (NumberFormatException e) {
     		throw new RecipeException("Units of sugar must be a positive integer");
     	}
-		if (amtSugar >= 0) {
+		if (amtSugar > 0) {
 			this.amtSugar = amtSugar;
 		} else {
 			throw new RecipeException("Units of sugar must be a positive integer");
@@ -137,13 +137,13 @@ public class Recipe {
 	 * @param price   The price to set.
 	 */
     public void setPrice(String price) throws RecipeException{
-    	int amtPrice = 0;
+    	int amtPrice;
     	try {
     		amtPrice = Integer.parseInt(price);
     	} catch (NumberFormatException e) {
     		throw new RecipeException("Price must be a positive integer");
     	}
-		if (amtPrice >= 0) {
+		if (amtPrice > 0) {
 			this.price = amtPrice;
 		} else {
 			throw new RecipeException("Price must be a positive integer");
@@ -174,9 +174,12 @@ public class Recipe {
 		if (obj == null)
 			return false;
 		if (getClass() != obj.getClass())
+			//will never enter this control structure as there are no parent/child class relations with Recipe
 			return false;
+
 		final Recipe other = (Recipe) obj;
 		if (name == null) {
+			// name is never null; we will never enter this control structures true flow
 			if (other.name != null)
 				return false;
 		} else if (!name.equals(other.name))
@@ -186,9 +189,15 @@ public class Recipe {
 
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((name == null) ? 0 : name.hashCode());
-		return result;
+		// final int prime = 31;
+		// int result = 1;
+		// result = prime * result + ((name == null) ? 0 : name.hashCode());
+		// Formula above optimized
+		// name is never equal to null in lifecycle of recipe object - proof in setName()
+		// Using PEMDAS we can further optimize
+		// In ( (prime * result) + name.hashCode()) prime * result is always 31 so simplify to prime + name,hashCode()
+		// Prime is just a constant so no practical affect to uniqueness of hashcode so can be simplified to name.hashCode()
+		// Optimized formula: int result = name.hashCode();
+		return name.hashCode();
 	}
 }
