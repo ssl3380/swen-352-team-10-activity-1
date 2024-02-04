@@ -26,134 +26,151 @@ class RecipeTest {
             testRecipeAgainst.setAmtMilk("2");
             testRecipeAgainst.setAmtSugar("4");
             testRecipeAgainst.setAmtChocolate("1");
-        }catch (RecipeException ignored){
+        } catch (RecipeException ignored) {
         }
 
     }
 
     @Test
-    void testSetAmtChocolate() {
-        //Non numeric test case
-        Exception exception = assertThrows(RecipeException.class, () -> testRecipe.setAmtChocolate("non numeric"));
+    void testSetAmtChocolateWhenAmtNonNumeric() {
+        Exception exception = assertThrows(RecipeException.class, () -> testRecipe.setAmtChocolate("chars"));
         String expectedMessage = "Units of chocolate must be a positive integer";
         String actualMessage = exception.getMessage();
         assertEquals(expectedMessage, actualMessage);
+    }
 
-        //0 test case
-        exception = assertThrows(RecipeException.class, () -> testRecipe.setAmtChocolate("0"));
-        actualMessage = exception.getMessage();
+    @Test
+    void testSetAmtChocolateWhenAmtNonPositive() {
+        Exception exception = assertThrows(RecipeException.class, () -> testRecipe.setAmtChocolate("0"));
+        String expectedMessage = "Units of chocolate must be a positive integer";
+        String actualMessage = exception.getMessage();
         assertEquals(expectedMessage, actualMessage);
+    }
 
-        // Positive test case
+    @Test
+    void testSetAmtChocolateWhenAmtPositive() {
         try {
             testRecipe.setAmtChocolate("3");
         } catch (RecipeException ignored) {
             fail("The units of chocolate must be a positive integer/greater than 0");
         }
-        // Check amount of chocolate is set to most recent modification
         assertEquals(3, testRecipe.getAmtChocolate());
     }
 
     @Test
-    void testSetAmtCoffee() {
-        //Non numeric test case
-        Exception exception = assertThrows(RecipeException.class, () -> testRecipe.setAmtCoffee("non numeric"));
+    void testSetAmtCoffeeWhenAmtNonNumeric() {
+        Exception exception = assertThrows(RecipeException.class, () -> testRecipe.setAmtCoffee("chars"));
         String expectedMessage = "Units of coffee must be a positive integer";
         String actualMessage = exception.getMessage();
         assertEquals(expectedMessage, actualMessage);
+    }
 
-        //0 test case
-        exception = assertThrows(RecipeException.class, () -> testRecipe.setAmtCoffee("0"));
-        actualMessage = exception.getMessage();
+    @Test
+    void testSetAmtCoffeeWhenAmtNonPositive() {
+        Exception exception = assertThrows(RecipeException.class, () -> testRecipe.setAmtCoffee("0"));
+        String expectedMessage = "Units of coffee must be a positive integer";
+        String actualMessage = exception.getMessage();
         assertEquals(expectedMessage, actualMessage);
+    }
 
-        // Positive test case
+    @Test
+    void testSetAmtCoffeeWhenAmtPositive() {
         try {
             testRecipe.setAmtCoffee("3");
         } catch (RecipeException ignored) {
             fail("The units of coffee must be a positive integer/greater than 0");
         }
-        // Check amount of chocolate is set to most recent modification
         assertEquals(3, testRecipe.getAmtCoffee());
     }
 
     @Test
-    void testSetAmtMilk() {
-        //Non numeric test case
-        Exception exception = assertThrows(RecipeException.class, () -> testRecipe.setAmtMilk("non numeric"));
+    void testSetAmtMilkWhenAmtNonNumeric() {
+        Exception exception = assertThrows(RecipeException.class, () -> testRecipe.setAmtMilk("chars"));
         String expectedMessage = "Units of milk must be a positive integer";
         String actualMessage = exception.getMessage();
         assertEquals(expectedMessage, actualMessage);
+    }
 
-        //0 test case
-        exception = assertThrows(RecipeException.class, () -> testRecipe.setAmtMilk("0"));
-        actualMessage = exception.getMessage();
+    @Test
+    void testSetAmtMilkWhenAmtNonPositive() {
+        Exception exception = assertThrows(RecipeException.class, () -> testRecipe.setAmtMilk("0"));
+        String expectedMessage = "Units of milk must be a positive integer";
+        String actualMessage = exception.getMessage();
         assertEquals(expectedMessage, actualMessage);
+    }
 
+    @Test
+    void testSetAmtMilkWhenAmtPositive() {
         // Positive test case
         try {
             testRecipe.setAmtMilk("3");
         } catch (RecipeException ignored) {
             fail("The units of milk must be a positive integer/greater than 0");
         }
-        // Check amount of chocolate is set to most recent modification
         assertEquals(3, testRecipe.getAmtMilk());
     }
 
     @Test
-    void testSetAmtSugar() {
-        //Non numeric test case
-        Exception exception = assertThrows(RecipeException.class, () -> testRecipe.setAmtSugar("non numeric"));
+    void testSetAmtSugarWhenAmtNonNumeric() {
+        Exception exception = assertThrows(RecipeException.class, () -> testRecipe.setAmtSugar("chars"));
         String expectedMessage = "Units of sugar must be a positive integer";
         String actualMessage = exception.getMessage();
         assertEquals(expectedMessage, actualMessage);
+    }
 
-        //0 test case
-        exception = assertThrows(RecipeException.class, () -> testRecipe.setAmtSugar("0"));
-        actualMessage = exception.getMessage();
+    @Test
+    void testSetAmtSugarWhenAmtNonPositive() {
+        Exception exception = assertThrows(RecipeException.class, () -> testRecipe.setAmtSugar("0"));
+        String expectedMessage = "Units of sugar must be a positive integer";
+        String actualMessage = exception.getMessage();
         assertEquals(expectedMessage, actualMessage);
+    }
 
-        // Positive test case
+    @Test
+    void testSetAmtSugarWhenAmtPositive() {
         try {
             testRecipe.setAmtSugar("3");
         } catch (RecipeException ignored) {
             fail("The units of sugar must be a positive integer/greater than 0");
         }
-        // Check amount of chocolate is set to most recent modification
         assertEquals(3, testRecipe.getAmtSugar());
     }
 
     @Test
-    void testSetName() {
-        //Null test case | Fail
+    void testSetNameWhenNull() {
         testRecipe.setName(null);
         assertEquals("", testRecipe.getName());
+    }
 
-        //String test case | Pass
+    @Test
+    void testSetName() {
         testRecipe.setName("caramel decaf");
         assertEquals("caramel decaf", testRecipe.getName());
     }
 
     @Test
-    void testSetPrice() {
-        //Non numeric test case
-        Exception exception = assertThrows(RecipeException.class, () -> testRecipe.setPrice("non numeric"));
+    void testSetPriceWhenAmtNonNumeric() {
+        Exception exception = assertThrows(RecipeException.class, () -> testRecipe.setPrice("chars"));
         String expectedMessage = "Price must be a positive integer";
         String actualMessage = exception.getMessage();
         assertEquals(expectedMessage, actualMessage);
+    }
 
-        //0 test case
-        exception = assertThrows(RecipeException.class, () -> testRecipe.setPrice("0"));
-        actualMessage = exception.getMessage();
+    @Test
+    void testSetPriceWhenAmtNonPositive() {
+        Exception exception = assertThrows(RecipeException.class, () -> testRecipe.setPrice("0"));
+        String expectedMessage = "Price must be a positive integer";
+        String actualMessage = exception.getMessage();
         assertEquals(expectedMessage, actualMessage);
+    }
 
-        // Positive test case
+    @Test
+    void testSetPriceWhenAmtPositive() {
         try {
             testRecipe.setPrice("3");
         } catch (RecipeException ignored) {
             fail("Price must be a positive integer/greater than 0");
         }
-        // Check amount of chocolate is set to most recent modification
         assertEquals(3, testRecipe.getPrice());
     }
 
@@ -163,30 +180,42 @@ class RecipeTest {
     }
 
     @Test
-    void testEquals() {
-        //Shall return equals as testRecipe and testRecipeAgainst name both ""
+    void testEqualsWhenTestSubjectNameEmptyTestAgainstNameEmpty() {
         assertEquals(testRecipeAgainst, testRecipe);
+    }
 
-        //Shall return not equals as testRecipe name is "" and testRecipeAgainst name is not
+    @Test
+    void testEqualsWhenTestSubjectNameEmptyTestAgainstNameNotEmpty() {
         testRecipeAgainst.setName("I have a diff name than you");
         assertNotEquals(testRecipeAgainst, testRecipe);
+    }
 
+    @Test
+    void testEqualsWhenTestSubjectNameNotEqualToTestAgainstName() {
+        testRecipeAgainst.setName("I have a diff name than you");
         testRecipe.setName("Capp");
-        //Shall return not equals as testRecipeAgainst and testRecipe name are not same
-        assertNotEquals(testRecipeAgainst, testRecipe);
-
-        testRecipeAgainst.setName(testRecipe.getName());
-        //Shall return equals as testRecipe and testObj name are same
-        assertEquals(testRecipeAgainst, testRecipe);
-
-        testRecipeAgainst = testRecipe;
-        //Shall return equals as testRecipeAgainst pt to exact mem loc as test testRecipe
-        assertEquals(testRecipeAgainst, testRecipe);
-
-        testRecipe = null;
-        //Shall return not equals as testRecipe is null so nothing to compare
         assertNotEquals(testRecipeAgainst, testRecipe);
     }
+
+    @Test
+    void testEqualsWhenTestSubjectNameEqualToTestAgainstName() {
+        testRecipe.setName("Capp");
+        testRecipeAgainst.setName(testRecipe.getName());
+        assertEquals(testRecipeAgainst, testRecipe);
+    }
+
+    @Test
+    void testEqualsWhenTestSubjectMemLocEqualTestAgainstMemLoc() {
+        testRecipeAgainst = testRecipe;
+        assertEquals(testRecipeAgainst, testRecipe);
+    }
+
+    @Test
+    void testEqualsWhenTestSubjectNull() {
+        testRecipe = null;
+        assertNotEquals(testRecipeAgainst, testRecipe);
+    }
+
 
     @Test
     void testHashCode() {
